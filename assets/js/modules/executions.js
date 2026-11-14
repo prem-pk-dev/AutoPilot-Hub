@@ -6,7 +6,8 @@ function formatDate(value){const date=new Date(value);return Number.isNaN(date.g
 function render(){
  const query=$("execution-search").value.trim().toLowerCase(),filter=$("execution-filter").value;
  const filtered=runs.filter(run=>(!query||(run.workflowName+" "+run.id).toLowerCase().includes(query))&&(filter==="all"||run.status===filter));
- $("execution-export").disabled=runs.length===0;\n $("run-total").textContent=runs.length;$("run-success").textContent=runs.filter(x=>x.status==="succeeded").length;$("run-failed").textContent=runs.filter(x=>x.status==="failed").length;$("run-active").textContent=runs.filter(x=>x.status==="running").length;
+ $("execution-export").disabled=runs.length===0;
+ $("run-total").textContent=runs.length;$("run-success").textContent=runs.filter(x=>x.status==="succeeded").length;$("run-failed").textContent=runs.filter(x=>x.status==="failed").length;$("run-active").textContent=runs.filter(x=>x.status==="running").length;
  $("execution-visible").textContent=filtered.length;$("execution-list").replaceChildren();$("execution-empty").hidden=filtered.length>0;
  for(const run of filtered){
   const card=document.createElement("article");card.className="execution-card";
