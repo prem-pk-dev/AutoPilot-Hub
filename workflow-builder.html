@@ -15,7 +15,7 @@
 <a class="nav-link " href="./integrations.html" ><span>⇄</span>Integrations</a>
 <a class="nav-link " href="./templates.html" ><span>▣</span>Templates</a>
 <a class="nav-link " href="./security.html" ><span>⬡</span>Security</a>
-<a class="nav-link " href="./settings.html" ><span>⚙</span>Settings</a></nav><div class="sidebar-bottom"><span class="status-dot"></span><span>Local workspace</span><small>v0.2.0 · Design system</small></div></aside>
+<a class="nav-link " href="./settings.html" ><span>⚙</span>Settings</a></nav><div class="sidebar-bottom"><span class="status-dot"></span><span>Local workspace</span><small>v0.3.0 · Local workspace</small></div></aside>
 <main class="main-content"><header class="topbar"><button class="icon-button mobile-menu" id="menu-toggle" aria-label="Toggle navigation">☰</button><div class="breadcrumbs">Workspace <span>/</span> <b>Workflow Builder</b></div><div class="top-actions"><span class="runtime-pill"><i></i> Browser workspace</span><button class="icon-button" id="theme-toggle" aria-label="Toggle color theme" title="Toggle theme">◐</button></div></header>
 <section class="page-content">
 <div class="page-heading"><div><div class="eyebrow">WORKFLOW DEFINITION EDITOR</div><h1 id="builder-title">Create workflow</h1><p class="muted">Define the metadata and trigger type for a reusable workflow.</p></div><span class="module-status">Save locally · No execution</span></div>
@@ -24,7 +24,7 @@
 <div class="form-grid"><label class="form-field form-span-2"><span>Workflow name <b>*</b></span><input id="workflow-name" name="name" type="text" minlength="3" maxlength="80" placeholder="e.g. Weekly website health check" required><small>Use a clear name that describes the intended outcome.</small></label>
 <label class="form-field form-span-2"><span>Description</span><textarea id="workflow-description" name="description" rows="3" maxlength="300" placeholder="Describe what this workflow is intended to do."></textarea></label>
 <label class="form-field"><span>Trigger type</span><select id="workflow-trigger"><option value="manual">Manual trigger</option><option value="schedule">Schedule (not active)</option><option value="webhook">Webhook (not active)</option></select></label>
-<label class="form-field"><span>Definition status</span><select id="workflow-status"><option value="draft">Draft</option><option value="active">Saved · enabled flag</option></select></label>
+<label class="form-field"><span>Definition status</span><select id="workflow-status"><option value="draft">Draft</option><option value="active">Marked active (does not execute)</option></select></label>
 <label class="form-field form-span-2"><span>Tags</span><input id="workflow-tags" type="text" maxlength="160" placeholder="monitoring, reports, personal"><small>Separate tags with commas (maximum 10).</small></label></div>
 <div class="workflow-form-footer"><a class="button button-secondary" href="./workflows.html">Cancel</a><button class="button button-primary" type="submit">Save workflow definition</button></div></form>
 <div class="panel workflow-note"><b>What happens when you save?</b><p class="muted">The definition is stored on this device using IndexedDB and appears in Workflows. No external service is contacted, no code is executed, and no background schedule is created.</p></div>
