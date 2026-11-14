@@ -68,3 +68,44 @@ test("rejects arbitrary URLs and malformed repository identifiers", async () => 
   await assert.rejects(loadCloudWorkflow("sample-repo-health", path), /invalid GitHub repository target/);
   await rm(dir, { recursive: true, force: true });
 });
+
+test("rejects invalid registry schema and workflows with too many steps", async () => {
+  const dir = await mkdtemp(join(tmpdir(), "autopilot-cloud-"));
+  const path = join(dir, "workflows.json");
+  await writeFile(path, JSON.stringify({ schemaVersion: 99, workflows: [] }));
+  await assert.rejects(loadCloudWorkflow("sample-repo-health", path), /schema is invalid/);
+  await writeFile(path, JSON.stringify(fixture(Array.from({ length: 6 }, () => ({ type: "github_repo_health", owner: "sample-owner", repository: "sample-repo" })))));
+  await assert.rejects(loadCloudWorkflow("sample-repo-health", path), /1 to 5 supported steps/);
+  await assert.rejects(loadCloudWorkflow("../unsafe", path), /valid workflow_id/);
+  await rm(dir, { recursive: true, force: true });
+});
+
+test("records unexpected GitHub response shapes as a failed report", async () => {
+  const dir = await mkdtemp(join(tmpdir(), "autopilot-cloud-"));
+  const configPath = join(dir, "workflows.json"), reportPath = join(dir, "report.json");
+  await writeFile(configPath, JSON.stringify(fixture()));
+  const { report } = await runCloudWorkflow("sample-repo-health", {
+    configPath, reportPath,
+    fetchImpl: async () => ({ ok: true, json: async () => ({ message: "unexpected response" }) })
+  });
+  assert.equal(report.status, "failed");
+  assert.match(report.steps[0].error, /unexpected repository response/);
+  await rm(dir, { recursive: true, force: true });
+});
+
+test("uses a bounded request timeout and never adds authorization headers", async () => {
+  const dir = await mkdtemp(join(tmpdir(), "autopilot-cloud-"));
+  const configPath = join(dir, "workflows.json"), reportPath = join(dir, "report.json");
+  await writeFile(configPath, JSON.stringify(fixture()));
+  const { report } = await runCloudWorkflow("sample-repo-health", {
+    configPath, reportPath,
+    fetchImpl: async (_url, options) => {
+      assert.ok(options.signal);
+      assert.equal(options.signal.aborted, false);
+      assert.equal(options.headers.Authorization, undefined);
+      return { ok: true, json: async () => ({ full_name: "sample-owner/sample-repo", default_branch: "main" }) };
+    }
+  });
+  assert.equal(report.status, "succeeded");
+  await rm(dir, { recursive: true, force: true });
+});
