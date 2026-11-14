@@ -32,6 +32,12 @@ test("workflow JSON import validates the entire file before saving", async ({ pa
   await expect(page.locator(".workflow-card")).toHaveCount(0);
   await page.locator("#workflow-import").setInputFiles({ name:"workflows.json", mimeType:"application/json", buffer:Buffer.from(JSON.stringify([{name:"Imported monitor",description:"Imported safely",status:"draft"}])) });
   await expect(page.locator(".workflow-card").filter({hasText:"Imported monitor"})).toBeVisible();
+  const exportPromise=page.waitForEvent("download");
+  await page.getByRole("button",{name:"Export workflows"}).click();
+  const exported=await exportPromise, exportPath="test-results/workflows-export.json";
+  await exported.saveAs(exportPath);
+  const exportedData=JSON.parse(await readFile(exportPath,"utf8"));
+  expect(exportedData.workflows.some(item=>item.name==="Imported monitor")).toBeTruthy();
 });
 test("workspace backup restores workflows and theme preference", async ({ page }, testInfo) => {
   await createWorkflow(page, "Backup source workflow");
