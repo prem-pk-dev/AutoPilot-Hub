@@ -6,7 +6,7 @@ All 15 modules are in the product scope. Implementation is phased; a module is n
 |---|---|---|---|
 | 1 | Overview Dashboard | Real counts, recent runs, health and quick actions | Browser + cloud data |
 | 2 | Workflow Builder | Create/edit validated action sequences and manually run supported local steps | Browser (local IndexedDB) |
-| 3 | Scheduler | Explain and configure supported GitHub schedules; manual dispatch | Cloud |
+| 3 | Scheduler | Preview a validated GitHub Actions manual cloud runner; scheduled cron remains opt-in and pending default-branch activation | Cloud |
 | 4 | Browser Automation | User-initiated navigation, page checks, permitted form interactions | Browser |
 | 5 | GitHub Automation | Repository/branch/workflow monitoring using safe public data or scoped credentials | Browser + cloud |
 | 6 | Website Monitoring | HTTP availability/status checks and reports from Actions | Cloud |

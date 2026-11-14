@@ -13,7 +13,7 @@
 
 ## Automated browser regression suite
 
-The repository includes a Playwright + Chromium end-to-end suite under `tests/e2e/`. GitHub Actions runs JavaScript syntax checks and the browser suite on pushes to `development/phase-3-2-quality-tests` and `development/phase-4-local-execution`, and on pull requests targeting the configured development/main branches.
+The repository includes a Playwright + Chromium end-to-end suite under `tests/e2e/` and Node.js unit tests for the cloud runner under `tests/cloud-runner.test.mjs`. GitHub Actions runs JavaScript syntax checks and the browser suite on pushes to the Phase 3.2, Phase 4 and Phase 5 development branches, and on pull requests targeting the configured development/main branches.
 
 Covered user flows:
 - Create, search, filter, edit and delete a workflow.
@@ -26,14 +26,16 @@ Covered user flows:
 - Execute a text-transform workflow and verify persisted step output.
 - Execute invalid JSON input and verify a failed run is recorded.
 - Export execution history.
-Run locally after installing dependencies and Chromium:
+Cloud runner unit tests can be run with `npm run test:cloud` (Node.js built-in test runner; no extra dependency).
+
+Run browser tests locally after installing dependencies and Chromium:
 ```sh
 npm install
 npx playwright install chromium
 npm run test:e2e
-``
+```
 
-The Phase 3.2 Chromium suite passed 7/7 tests. The Phase 4 Chromium suite passed 9/9 tests on GitHub Actions, including successful and failed manual runs. Cross-browser testing outside Chromium and deeper visual QA remain release follow-ups. Cross-browser testing outside Chromium and deeper visual QA remain release follow-ups.
+The Phase 3.2 Chromium suite passed 7/7 tests. The Phase 4 Chromium suite passed 9/9 tests on GitHub Actions, including successful and failed manual runs. Phase 5 cloud-runner unit tests validate the registry allow-list, disabled/unknown workflow rejection, successful JSON report generation, API failures and malformed targets. The latest Phase 5 GitHub Actions run passed all 5 cloud-runner unit tests and all 9 Chromium browser tests. The cloud-runner unit suite uses mocked GitHub API responses; a real workflow_dispatch and artifact download still require the workflow to be present on the repository's default branch. Cross-browser testing outside Chromium and deeper visual QA remain release follow-ups.
 
 ## Test data policy
 - Synthetic fixtures must be labeled test data.

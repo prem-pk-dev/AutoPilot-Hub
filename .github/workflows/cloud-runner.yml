@@ -1,0 +1,42 @@
+name: Cloud workflow runner
+
+on:
+  workflow_dispatch:
+    inputs:
+      workflow_id:
+        description: "Enabled cloud workflow ID from automation/cloud-workflows.json"
+        required: true
+        type: choice
+        options:
+          - autopilot-hub-repo-health
+
+permissions:
+  contents: read
+
+concurrency:
+  group: autopilot-cloud-runner
+  cancel-in-progress: false
+
+jobs:
+  run-cloud-workflow:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Run allow-listed cloud workflow
+        env:
+          INPUT_WORKFLOW_ID: ${{ inputs.workflow_id }}
+        run: node scripts/cloud-runner.mjs
+      - name: Upload cloud execution report
+        if: always() && hashFiles('artifacts/cloud-run-report.json') != ''
+        uses: actions/upload-artifact@v4
+        with:
+          name: cloud-run-report-${{ github.run_id }}
+          path: artifacts/cloud-run-report.json
+          if-no-files-found: warn
+          retention-days: 7

@@ -4,12 +4,14 @@ on:
     branches:
       - development/phase-3-2-quality-tests
       - development/phase-4-local-execution
+      - development/phase-5-cloud-runtime
   pull_request:
     branches:
       - development/core-platform
       - main
       - development/phase-3-2-quality-tests
       - development/phase-4-local-execution
+      - development/phase-5-cloud-runtime
 permissions:
   contents: read
 jobs:
@@ -27,6 +29,8 @@ jobs:
         run: npm install --no-audit --no-fund
       - name: Syntax-check JavaScript
         run: |
+          node --check scripts/cloud-runner.mjs
+          node --check tests/cloud-runner.test.mjs
           node --check assets/js/core/app.js
           node --check assets/js/core/storage.js
           node --check assets/js/core/engine.js
@@ -38,5 +42,7 @@ jobs:
           node --check tests/e2e/app.spec.js
       - name: Install Chromium
         run: npx playwright install --with-deps chromium
+      - name: Run cloud runner unit tests
+        run: npm run test:cloud
       - name: Run browser regression suite
         run: npm run test:e2e
