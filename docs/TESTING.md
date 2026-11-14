@@ -17,16 +17,15 @@ The repository includes a Playwright + Chromium end-to-end suite under `tests/e2
 
 Covered user flows:
 - Create, search, filter, edit and delete a workflow.
-- Reject a malformed workflow import without saving any partial records.
+- Reject malformed workflow imports without partial saves; export workflow JSON.
 - Export a workspace backup and restore workflow data plus theme preference.
+- Reject invalid workspace backups without replacing existing data.
 - Require two confirmations before clearing local data.
 - Open mobile navigation and check for horizontal overflow at 390px.
 - Confirm dashboard counts reflect IndexedDB records.
-- Run a successful text-transform workflow and verify persisted step output.
-- Run invalid JSON input and verify a failed execution record appears in the Execution Center.
-- Run a successful text-transform workflow and verify persisted step output.
-- Run invalid JSON input and verify a failed execution record appears in the Execution Center.
-
+- Execute a text-transform workflow and verify persisted step output.
+- Execute invalid JSON input and verify a failed run is recorded.
+- Export execution history.
 Run locally after installing dependencies and Chromium:
 ```sh
 npm install
@@ -34,7 +33,7 @@ npx playwright install chromium
 npm run test:e2e
 ``
 
-The Phase 3.2 Chromium suite passed 7/7 tests. Phase 4 adds manual execution cases; its first CI run must pass before the execution engine is merged. Cross-browser testing outside Chromium and deeper visual QA remain release follow-ups.
+The Phase 3.2 Chromium suite passed 7/7 tests. The Phase 4 Chromium suite passed 9/9 tests on GitHub Actions, including successful and failed manual runs. Cross-browser testing outside Chromium and deeper visual QA remain release follow-ups. Cross-browser testing outside Chromium and deeper visual QA remain release follow-ups.
 
 ## Test data policy
 - Synthetic fixtures must be labeled test data.
