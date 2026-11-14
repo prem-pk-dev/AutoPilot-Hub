@@ -71,4 +71,5 @@
 .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 @media(max-width:900px){.workflow-toolbar{align-items:stretch;flex-direction:column}.workflow-toolbar-main,.workflow-toolbar-side{flex-wrap:wrap}.workflow-list{grid-template-columns:1fr}}
 @media(max-width:600px){.form-grid{grid-template-columns:1fr}.form-span-2{grid-column:auto}.settings-section{align-items:flex-start;flex-direction:column}.settings-actions{flex-wrap:wrap}.search-field{min-width:0;flex:1}.workflow-toolbar-main{display:grid;grid-template-columns:1fr}.filter-field select{width:100%}}
-\n.button:disabled{opacity:.42;cursor:not-allowed;filter:none}\n
+
+.button:disabled{opacity:.42;cursor:not-allowed;filter:none}
