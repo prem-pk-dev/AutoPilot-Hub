@@ -78,8 +78,11 @@ test("clear local workspace requires two confirmations", async ({ page }) => {
 test("mobile navigation opens and layout has no horizontal overflow", async ({ page }) => {
   await page.setViewportSize({width:390,height:844});
   await page.goto("/workflows.html");
-  await page.getByRole("button",{name:"Toggle navigation"}).click();
+  const menuToggle=page.getByRole("button",{name:"Toggle navigation"});
+  await menuToggle.click();
   await expect(page.locator("#sidebar")).toHaveClass(/open/);
+  await menuToggle.click();
+  await expect(page.locator("#sidebar")).not.toHaveClass(/open/);
   const dimensions=await page.evaluate(()=>({viewport:document.documentElement.clientWidth,content:document.documentElement.scrollWidth}));
   expect(dimensions.content).toBeLessThanOrEqual(dimensions.viewport+1);
 });
