@@ -81,3 +81,23 @@ test("dashboard reflects real workflow count from IndexedDB", async ({ page }) =
   await page.goto("/dashboard.html");
   await expect(page.locator("#workflow-count")).toHaveText("1");
 });
+
+test("invalid workspace backup is rejected without replacing existing data", async ({ page }) => {
+  await createWorkflow(page, "Keep this workflow");
+  await page.goto("/settings.html");
+  const invalidBackup = {
+    application: "AutoPilot Hub",
+    schemaVersion: 1,
+    preferences: { theme: "dark" },
+    data: { workflows: [], executions: [], settings: [{ value: "missing key" }] }
+  };
+  page.once("dialog", dialog => dialog.accept());
+  await page.locator("#settings-import").setInputFiles({
+    name: "invalid-backup.json",
+    mimeType: "application/json",
+    buffer: Buffer.from(JSON.stringify(invalidBackup))
+  });
+  await expect(page.locator("#toast-region")).toContainText("invalid settings record");
+  await page.goto("/workflows.html");
+  await expect(page.locator(".workflow-card").filter({ hasText: "Keep this workflow" })).toBeVisible();
+});
