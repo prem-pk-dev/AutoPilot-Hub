@@ -116,6 +116,10 @@ test("manual workflow execution records successful step output", async ({ page }
   await page.goto("/executions.html");
   await expect(page.locator(".execution-card").filter({ hasText: "Text transform runner" })).toBeVisible();
   await expect(page.locator("#run-success")).toHaveText("1");
+  await expect(page.getByRole("button", { name: "Export run history" })).toBeEnabled();
+  const historyDownload = page.waitForEvent("download");
+  await page.getByRole("button", { name: "Export run history" }).click();
+  await expect(await historyDownload).toBeTruthy();
   await page.locator(".execution-details summary").first().click();
   await expect(page.locator(".execution-step pre").first()).toContainText("HELLO FROM AUTOPILOT HUB");
 });
