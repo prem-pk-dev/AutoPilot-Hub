@@ -5,7 +5,7 @@ async function createWorkflow(page, name, description = "Automated test workflow
   await page.getByLabel("Workflow name").fill(name);
   await page.getByLabel("Description").fill(description);
   await page.getByRole("button", { name: "Save workflow definition" }).click();
-  await expect(page).toHaveURL(/workflows\\.html$/);
+  await expect(page).toHaveURL("http://127.0.0.1:4173/workflows.html");
   await expect(page.locator(".workflow-card").filter({ hasText: name })).toBeVisible();
 }
 test("create, search, filter, edit and delete a workflow", async ({ page }) => {
