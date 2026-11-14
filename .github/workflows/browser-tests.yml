@@ -3,11 +3,13 @@ on:
   push:
     branches:
       - development/phase-3-2-quality-tests
+      - development/phase-4-local-execution
   pull_request:
     branches:
       - development/core-platform
       - main
       - development/phase-3-2-quality-tests
+      - development/phase-4-local-execution
 permissions:
   contents: read
 jobs:
