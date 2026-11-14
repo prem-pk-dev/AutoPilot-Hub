@@ -33,4 +33,4 @@ A browser-first, single-user automation control center built with HTML, CSS, Jav
 - [Design system](docs/DESIGN-SYSTEM.md)
 
 ## Status
-Phase 2 design foundation in progress. The responsive dashboard, shared dark/light design system, mobile navigation, and 14 additional module page shells are implemented on `development/core-platform`. Automation engines remain pending and are clearly labeled; page shells are not presented as completed automations.
+Phase 3 dashboard and local workflow management are implemented on `development/phase-3-dashboard`: create/edit workflow definitions, search/filter, delete, JSON import, full workspace backup/restore, and guarded local-data clearing. These features use IndexedDB in the current browser only. Workflow definitions do not execute; schedule/webhook triggers and automation engines remain pending. The base responsive dashboard and shared design system are on `development/core-platform`. Source-level checks are being run; no deployment or merge to `main` has been performed.
