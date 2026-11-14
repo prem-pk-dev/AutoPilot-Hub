@@ -58,14 +58,15 @@ export async function clearWorkspace() {
   return new Promise((resolve, reject) => {
     const tx = db.transaction(STORES, "readwrite");
     for (const name of STORES) tx.objectStore(name).clear();
-    tx.oncomplete = () => { db.close(); resolve(true); };
+    tx.oncomplete = () => { db.close(); try { localStorage.removeItem("autopilot-theme"); } catch {} resolve(true); };
     tx.onerror = () => { db.close(); reject(tx.error || new Error("Could not clear workspace data.")); };
   });
 }
 
 export async function exportWorkspace() {
   const [workflows, executions, settings] = await Promise.all(STORES.map(getAll));
-  return { schemaVersion: 1, exportedAt: new Date().toISOString(), application: "AutoPilot Hub",
+  let theme = "dark"; try { theme = localStorage.getItem("autopilot-theme") === "light" ? "light" : "dark"; } catch {}
+  return { schemaVersion: 1, exportedAt: new Date().toISOString(), application: "AutoPilot Hub", preferences: { theme },
     data: { workflows, executions, settings } };
 }
 
@@ -88,7 +89,7 @@ export async function importWorkspace(payload) {
       store.clear();
       for (const item of data[name]) store.put(item);
     }
-    tx.oncomplete = () => { db.close(); resolve(true); };
+    tx.oncomplete = () => { db.close(); try { if (payload.preferences?.theme === "light") localStorage.setItem("autopilot-theme", "light"); else localStorage.removeItem("autopilot-theme"); } catch {} resolve(true); };
     tx.onerror = () => { db.close(); reject(tx.error || new Error("Could not restore workspace backup.")); };
     tx.onabort = () => { db.close(); reject(tx.error || new Error("Restore was cancelled.")); };
   });
