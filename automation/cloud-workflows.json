@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "workflows": [
+    {
+      "id": "autopilot-hub-repo-health",
+      "name": "AutoPilot Hub repository health report",
+      "description": "Fetches public repository metadata from GitHub and writes a JSON report.",
+      "enabled": true,
+      "steps": [
+        {
+          "type": "github_repo_health",
+          "owner": "prem-pk-dev",
+          "repository": "AutoPilot-Hub"
+        }
+      ]
+    }
+  ]
+}
