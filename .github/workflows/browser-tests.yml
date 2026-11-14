@@ -23,6 +23,15 @@ jobs:
           node-version: 22
       - name: Install test dependencies
         run: npm install --no-audit --no-fund
+      - name: Syntax-check JavaScript
+        run: |
+          node --check assets/js/core/app.js
+          node --check assets/js/core/storage.js
+          node --check assets/js/modules/workflows.js
+          node --check assets/js/modules/workflow-builder.js
+          node --check assets/js/modules/settings-manager.js
+          node --check tests/server.mjs
+          node --check tests/e2e/app.spec.js
       - name: Install Chromium
         run: npx playwright install --with-deps chromium
       - name: Run browser regression suite
