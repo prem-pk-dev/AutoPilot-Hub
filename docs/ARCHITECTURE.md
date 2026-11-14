@@ -66,7 +66,7 @@ A workflow consists of:
 - execution context: browser-local or cloud;
 - result: status, timestamps, step logs, and output.
 
-The first browser-local engine supports text transformation, JSON validation, timestamp generation, and bounded waits. The first cloud runner supports a read-only public GitHub repository health check from a committed, schema-validated registry. It uses no token or write permission. It runs only while the page remains open, uses no `eval` or dynamic code, makes no remote requests, and cannot access secrets. Browser-local schedules do not run while the browser is closed. Cloud schedules may be delayed and are subject to GitHub quotas and platform limits.
+The first browser-local engine supports text transformation, JSON validation, timestamp generation, and bounded waits. It runs only while its browser tab remains open. The first cloud runner supports a read-only public GitHub repository health check from a committed, schema-validated registry. It runs on a GitHub-hosted runner after a manual Actions dispatch, uses no personal access token or write permission, and does not depend on the user's browser remaining open. The runner contacts only the fixed `api.github.com` origin and does not execute arbitrary code or URLs. No recurring schedule is enabled. Browser-local schedules do not run while the browser is closed; GitHub cron schedules, when separately configured, may be delayed and are subject to quotas and platform limits.
 
 ## Security boundary
 - Public repository contents are public.
