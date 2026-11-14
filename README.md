@@ -30,6 +30,7 @@ A browser-first, single-user automation control center built with HTML, CSS, Jav
 - [Security](docs/SECURITY.md)
 - [Testing](docs/TESTING.md)
 - [Deployment](docs/DEPLOYMENT.md)
+- [Design system](docs/DESIGN-SYSTEM.md)
 
 ## Status
-Foundation implementation in progress. The first responsive dashboard shell, IndexedDB workspace initialization, theme toggle, mobile navigation, and JSON backup export are implemented on `development/core-platform`. Remaining modules are phased work.
+Phase 2 design foundation in progress. The responsive dashboard, shared dark/light design system, mobile navigation, and 14 additional module page shells are implemented on `development/core-platform`. Automation engines remain pending and are clearly labeled; page shells are not presented as completed automations.
