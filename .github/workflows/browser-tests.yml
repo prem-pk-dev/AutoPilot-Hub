@@ -1,0 +1,29 @@
+name: Browser regression tests
+on:
+  push:
+    branches:
+      - development/phase-3-2-quality-tests
+  pull_request:
+    branches:
+      - development/core-platform
+      - main
+      - development/phase-3-2-quality-tests
+permissions:
+  contents: read
+jobs:
+  chromium:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Install test dependencies
+        run: npm install --no-audit --no-fund
+      - name: Install Chromium
+        run: npx playwright install --with-deps chromium
+      - name: Run browser regression suite
+        run: npm run test:e2e
