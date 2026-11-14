@@ -75,7 +75,8 @@ async function exportData() {
 }
 
 function initTheme() {
-  let saved = null;\n  try { saved = localStorage.getItem("autopilot-theme"); } catch {}
+  let saved = null;
+  try { saved = localStorage.getItem("autopilot-theme"); } catch {}
   if (saved === "light") document.documentElement.dataset.theme = "light";
   byId("theme-toggle")?.addEventListener("click", () => {
     const next = document.documentElement.dataset.theme === "light" ? "dark" : "light";
