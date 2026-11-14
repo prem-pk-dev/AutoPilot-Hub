@@ -1,0 +1,13 @@
+{
+  "name": "autopilot-hub",
+  "private": true,
+  "version": "0.5.0",
+  "type": "module",
+  "scripts": {
+    "test:e2e": "playwright test",
+    "test:cloud": "node --test tests/cloud-runner.test.mjs"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.56.1"
+  }
+}

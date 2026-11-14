@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#080d18"><meta name="description" content="Create, organize and manage reusable automation workflows."><title>Workflows — AutoPilot Hub</title><link rel="stylesheet" href="./assets/css/global.css"><script type="module" src="./assets/js/modules/module-page.js"></script><script type="module" src="./assets/js/modules/workflows.js"></script></head>
+<body><div class="app-shell"><aside class="sidebar" id="sidebar"><a class="brand" href="./dashboard.html"><span class="brand-mark">A</span><span>AutoPilot <b>Hub</b><small>CONTROL CENTER</small></span></a><div class="nav-label">WORKSPACE</div><nav class="nav-list" aria-label="Main navigation"><a class="nav-link " href="./dashboard.html" ><span>▦</span>Overview</a>
+<a class="nav-link active" href="./workflows.html" aria-current="page"><span>◇</span>Workflows</a>
+<a class="nav-link " href="./workflow-builder.html" ><span>⌘</span>Workflow Builder</a>
+<a class="nav-link " href="./scheduler.html" ><span>◷</span>Scheduler</a>
+<a class="nav-link " href="./browser-automation.html" ><span>▣</span>Browser Automation</a>
+<a class="nav-link " href="./github-automation.html" ><span>⌘</span>GitHub Automation</a>
+<a class="nav-link " href="./website-monitor.html" ><span>◎</span>Website Monitor</a>
+<a class="nav-link " href="./file-automation.html" ><span>▤</span>File Automation</a>
+<a class="nav-link " href="./image-studio.html" ><span>▧</span>Image Studio</a>
+<a class="nav-link " href="./executions.html" ><span>≡</span>Executions</a>
+<a class="nav-link " href="./notifications.html" ><span>♧</span>Notifications</a>
+<a class="nav-link " href="./analytics.html" ><span>▥</span>Analytics</a>
+<a class="nav-link " href="./integrations.html" ><span>⇄</span>Integrations</a>
+<a class="nav-link " href="./templates.html" ><span>▣</span>Templates</a>
+<a class="nav-link " href="./security.html" ><span>⬡</span>Security</a>
+<a class="nav-link " href="./settings.html" ><span>⚙</span>Settings</a></nav><div class="sidebar-bottom"><span class="status-dot"></span><span>Local workspace</span><small>v0.4.0 · Local execution</small></div></aside>
+<main class="main-content"><header class="topbar"><button class="icon-button mobile-menu" id="menu-toggle" aria-label="Toggle navigation">☰</button><div class="breadcrumbs">Workspace <span>/</span> <b>Workflows</b></div><div class="top-actions"><span class="runtime-pill"><i></i> Browser workspace</span><button class="icon-button" id="theme-toggle" aria-label="Toggle color theme" title="Toggle theme">◐</button></div></header>
+<section class="page-content">
+<div class="page-heading"><div><div class="eyebrow">AUTOMATION LIBRARY</div><h1>Workflows</h1><p class="muted">Your saved workflow definitions, stored locally in this browser.</p></div><div class="heading-actions"><a class="button button-primary" href="./workflow-builder.html">＋ New workflow</a></div></div>
+<div class="notice"><span class="notice-icon">ⓘ</span><div><b>Manual browser-local execution is available</b><p>Run supported action steps manually in this browser. Schedule and webhook triggers are still inactive; no cloud job is created.</p></div><span class="notice-tag">LOCAL DATA</span></div>
+<div class="panel workflow-toolbar"><div class="workflow-toolbar-main"><label class="search-field"><span>⌕</span><input id="workflow-search" type="search" placeholder="Search workflow name or description" aria-label="Search workflows"></label><label class="filter-field"><span class="sr-only">Filter workflows</span><select id="workflow-filter"><option value="all">All statuses</option><option value="draft">Draft</option><option value="active">Marked active</option></select></label></div><div class="workflow-toolbar-side"><button class="button button-secondary" id="workflow-export" type="button" disabled>↧ Export workflows</button><label class="button button-secondary file-button">＋ Import JSON<input id="workflow-import" type="file" accept="application/json,.json"></label><span class="subtle-label"><b id="workflow-visible">0</b> shown · <b id="workflow-total">0</b> total</span></div></div>
+<div class="workflow-list" id="workflow-list"></div><div class="empty-state panel" id="workflow-empty"><div class="empty-icon">◇</div><b>No workflows yet</b><p>Create a workflow definition or adjust your search and status filter.</p><a class="button button-primary" href="./workflow-builder.html">Create first workflow</a></div>
+<footer class="footer"><span>AutoPilot Hub <b>v0.3.0</b></span><span>Local workflow library · Manual runs only</span></footer></section></main></div><div class="toast-region" id="toast-region" aria-live="polite"></div></body></html>

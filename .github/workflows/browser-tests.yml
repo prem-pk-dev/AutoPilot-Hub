@@ -1,0 +1,48 @@
+name: Browser regression tests
+on:
+  push:
+    branches:
+      - development/phase-3-2-quality-tests
+      - development/phase-4-local-execution
+      - development/phase-5-cloud-runtime
+  pull_request:
+    branches:
+      - development/core-platform
+      - main
+      - development/phase-3-2-quality-tests
+      - development/phase-4-local-execution
+      - development/phase-5-cloud-runtime
+permissions:
+  contents: read
+jobs:
+  chromium:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Install test dependencies
+        run: npm install --no-audit --no-fund
+      - name: Syntax-check JavaScript
+        run: |
+          node --check scripts/cloud-runner.mjs
+          node --check tests/cloud-runner.test.mjs
+          node --check assets/js/core/app.js
+          node --check assets/js/core/storage.js
+          node --check assets/js/core/engine.js
+          node --check assets/js/modules/workflows.js
+          node --check assets/js/modules/workflow-builder.js
+          node --check assets/js/modules/settings-manager.js
+          node --check assets/js/modules/executions.js
+          node --check tests/server.mjs
+          node --check tests/e2e/app.spec.js
+      - name: Install Chromium
+        run: npx playwright install --with-deps chromium
+      - name: Run cloud runner unit tests
+        run: npm run test:cloud
+      - name: Run browser regression suite
+        run: npm run test:e2e

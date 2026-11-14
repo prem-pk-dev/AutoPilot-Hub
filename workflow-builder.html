@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#080d18"><meta name="description" content="Connect triggers, conditions and actions into repeatable workflows."><title>Workflow Builder — AutoPilot Hub</title><link rel="stylesheet" href="./assets/css/global.css"><script type="module" src="./assets/js/modules/module-page.js"></script><script type="module" src="./assets/js/modules/workflow-builder.js"></script></head>
+<body><div class="app-shell"><aside class="sidebar" id="sidebar"><a class="brand" href="./dashboard.html"><span class="brand-mark">A</span><span>AutoPilot <b>Hub</b><small>CONTROL CENTER</small></span></a><div class="nav-label">WORKSPACE</div><nav class="nav-list" aria-label="Main navigation"><a class="nav-link " href="./dashboard.html" ><span>▦</span>Overview</a>
+<a class="nav-link " href="./workflows.html" ><span>◇</span>Workflows</a>
+<a class="nav-link active" href="./workflow-builder.html" aria-current="page"><span>⌘</span>Workflow Builder</a>
+<a class="nav-link " href="./scheduler.html" ><span>◷</span>Scheduler</a>
+<a class="nav-link " href="./browser-automation.html" ><span>▣</span>Browser Automation</a>
+<a class="nav-link " href="./github-automation.html" ><span>⌘</span>GitHub Automation</a>
+<a class="nav-link " href="./website-monitor.html" ><span>◎</span>Website Monitor</a>
+<a class="nav-link " href="./file-automation.html" ><span>▤</span>File Automation</a>
+<a class="nav-link " href="./image-studio.html" ><span>▧</span>Image Studio</a>
+<a class="nav-link " href="./executions.html" ><span>≡</span>Executions</a>
+<a class="nav-link " href="./notifications.html" ><span>♧</span>Notifications</a>
+<a class="nav-link " href="./analytics.html" ><span>▥</span>Analytics</a>
+<a class="nav-link " href="./integrations.html" ><span>⇄</span>Integrations</a>
+<a class="nav-link " href="./templates.html" ><span>▣</span>Templates</a>
+<a class="nav-link " href="./security.html" ><span>⬡</span>Security</a>
+<a class="nav-link " href="./settings.html" ><span>⚙</span>Settings</a></nav><div class="sidebar-bottom"><span class="status-dot"></span><span>Local workspace</span><small>v0.3.0 · Local workspace</small></div></aside>
+<main class="main-content"><header class="topbar"><button class="icon-button mobile-menu" id="menu-toggle" aria-label="Toggle navigation">☰</button><div class="breadcrumbs">Workspace <span>/</span> <b>Workflow Builder</b></div><div class="top-actions"><span class="runtime-pill"><i></i> Browser workspace</span><button class="icon-button" id="theme-toggle" aria-label="Toggle color theme" title="Toggle theme">◐</button></div></header>
+<section class="page-content">
+<div class="page-heading"><div><div class="eyebrow">WORKFLOW DEFINITION EDITOR</div><h1 id="builder-title">Create workflow</h1><p class="muted">Configure a sequence of safe, browser-local actions.</p></div><span class="module-status">Manual local run · No cloud schedule</span></div>
+<div class="notice"><span class="notice-icon">ⓘ</span><div><b>Browser-local execution is now available</b><p>Manual runs support text transformation, JSON validation, timestamp generation and short waits. No code evaluation, credentials, remote API calls or background scheduling are supported by this first engine.</p></div></div>
+<form class="panel workflow-form" id="workflow-form"><input type="hidden" id="workflow-id">
+<div class="form-section-heading"><span class="subtle-label">01 · WORKFLOW DETAILS</span><h2>Workflow information</h2></div>
+<div class="form-grid"><label class="form-field form-span-2"><span>Workflow name <b>*</b></span><input id="workflow-name" name="name" type="text" minlength="3" maxlength="80" placeholder="e.g. Prepare a daily text report" required><small>Use a clear name that describes the intended outcome.</small></label>
+<label class="form-field form-span-2"><span>Description</span><textarea id="workflow-description" name="description" rows="3" maxlength="300" placeholder="Describe what this workflow does."></textarea></label>
+<label class="form-field"><span>Trigger type</span><select id="workflow-trigger"><option value="manual">Manual trigger (available)</option><option value="schedule">Schedule (not active)</option><option value="webhook">Webhook (not active)</option></select></label>
+<label class="form-field"><span>Definition status</span><select id="workflow-status"><option value="draft">Draft</option><option value="active">Marked active</option></select></label>
+<label class="form-field form-span-2"><span>Tags</span><input id="workflow-tags" type="text" maxlength="160" placeholder="reports, text, data"><small>Separate tags with commas (maximum 10).</small></label></div>
+<div class="form-section-heading step-section-heading"><span class="subtle-label">02 · ACTION SEQUENCE</span><h2>What should happen when you run it?</h2><p class="muted">Actions run in order. Use {{previous}} in an input to use the preceding step's output.</p></div>
+<div id="step-list" class="step-list"></div>
+<div class="step-add-row"><button class="button button-secondary" type="button" id="add-step">＋ Add action step</button><span class="subtle-label" id="step-count">1 / 10 steps</span></div>
+<div class="workflow-form-footer"><a class="button button-secondary" href="./workflows.html">Cancel</a><button class="button button-primary" type="submit">Save workflow definition</button></div></form>
+<div class="panel workflow-note"><b>Execution limits</b><p class="muted">Maximum 10 steps per workflow, 5,000 characters per text/JSON input and 10 seconds per wait action. Execution runs in the open browser tab and stops if the tab is closed. Schedule and webhook triggers are not active.</p></div>
+<footer class="footer"><span>AutoPilot Hub <b>v0.4.0</b></span><span>Browser-local workflow engine</span></footer></section></main></div><div class="toast-region" id="toast-region" aria-live="polite"></div></body></html>
