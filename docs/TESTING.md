@@ -13,7 +13,7 @@
 
 ## Automated browser regression suite
 
-The repository includes a Playwright + Chromium end-to-end suite under `tests/e2e/`. GitHub Actions runs JavaScript syntax checks and the browser suite on pushes to `development/phase-3-2-quality-tests` and `development/phase-4-local-execution`, and on pull requests targeting the configured development/main branches.
+The repository includes a Playwright + Chromium end-to-end suite under `tests/e2e/` and Node.js unit tests for the cloud runner under `tests/cloud-runner.test.mjs`. GitHub Actions runs JavaScript syntax checks and the browser suite on pushes to the Phase 3.2, Phase 4 and Phase 5 development branches, and on pull requests targeting the configured development/main branches.
 
 Covered user flows:
 - Create, search, filter, edit and delete a workflow.
@@ -26,7 +26,7 @@ Covered user flows:
 - Execute a text-transform workflow and verify persisted step output.
 - Execute invalid JSON input and verify a failed run is recorded.
 - Export execution history.
-Run locally after installing dependencies and Chromium:
+Cloud runner unit tests can be run with `npm run test:cloud` (Node.js built-in test runner; no extra dependency).\n\nRun browser tests locally after installing dependencies and Chromium:
 ```sh
 npm install
 npx playwright install chromium
