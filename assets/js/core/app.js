@@ -63,7 +63,7 @@ async function exportData() {
     document.body.append(anchor);
     anchor.click();
     anchor.remove();
-    URL.revokeObjectURL(url);
+    window.setTimeout(() => URL.revokeObjectURL(url), 1000);
     toast("Workspace backup exported.");
   } catch (error) {
     toast(error.message || "Could not export workspace data.");
@@ -71,13 +71,13 @@ async function exportData() {
 }
 
 function initTheme() {
-  const saved = localStorage.getItem("autopilot-theme");
+  let saved = null;\n  try { saved = localStorage.getItem("autopilot-theme"); } catch {}
   if (saved === "light") document.documentElement.dataset.theme = "light";
   byId("theme-toggle")?.addEventListener("click", () => {
     const next = document.documentElement.dataset.theme === "light" ? "dark" : "light";
     if (next === "dark") delete document.documentElement.dataset.theme;
     else document.documentElement.dataset.theme = next;
-    localStorage.setItem("autopilot-theme", next);
+    try { localStorage.setItem("autopilot-theme", next); } catch { toast("Theme changed for this session, but browser storage is unavailable."); }
   });
 }
 
