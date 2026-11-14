@@ -125,7 +125,7 @@ test("invalid JSON action is recorded as a failed execution", async ({ page }) =
   await page.getByLabel("Workflow name").fill("Invalid JSON workflow");
   await page.getByLabel("Action type").selectOption("json_validate");
   await page.getByLabel("JSON input").fill("{ invalid json");
-  await page.getByRole("button", { name: "Save workflow" }).click();
+  await page.getByRole("button", { name: "Save workflow definition" }).click();
   await expect(page).toHaveURL("http://127.0.0.1:4173/workflows.html");
   await page.locator(".workflow-card").getByRole("button", { name: "▶ Run now" }).click();
   await expect(page.locator("#toast-region")).toContainText("Step 1 (Validate JSON) failed");
