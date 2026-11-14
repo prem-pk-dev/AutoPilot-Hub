@@ -71,6 +71,7 @@ test("clear local workspace requires two confirmations", async ({ page }) => {
   page.on("dialog",dialog=>{confirmations+=1;dialog.accept();});
   await page.getByRole("button",{name:"Clear all local data"}).click();
   await expect.poll(()=>confirmations).toBe(2);
+  await expect(page.locator("#toast-region")).toContainText("Local workspace cleared");
   await page.goto("/workflows.html");
   await expect(page.locator(".workflow-card")).toHaveCount(0);
 });
