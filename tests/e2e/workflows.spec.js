@@ -1,9 +1,8 @@
 import { test, expect } from "@playwright/test";
 
 test.beforeEach(async ({ page }) => {
+  // Playwright creates an isolated browser context for each test, so IndexedDB starts clean.
   await page.goto("/workflows.html");
-  await page.evaluate(() => indexedDB.deleteDatabase("autopilot-hub"));
-  await page.reload();
 });
 
 test("creates, edits, searches, filters and deletes a workflow", async ({ page }) => {
