@@ -5,8 +5,8 @@ let records = [];
 function toast(message) { const el=$("toast-region"); if(!el)return; const n=document.createElement("div"); n.className="toast"; n.textContent=message; el.append(n); setTimeout(()=>n.remove(),3000); }
 function render() {
   const query=$("workflow-search").value.trim().toLowerCase(), filter=$("workflow-filter").value;
-  const list=records.filter(w=>(!query || (w.name+" "+(w.description||"")).toLowerCase().includes(query)) && (filter==="all" || w.status===filter));
-  $("workflow-total").textContent=records.length;
+  const list=records.filter(w=>(!query || (w.name+" "+(w.description||"")+" "+(w.tags||[]).join(" ")).toLowerCase().includes(query)) && (filter==="all" || w.status===filter));
+  $("workflow-total").textContent=records.length;\n  $("workflow-export").disabled=records.length===0;
   $("workflow-list").replaceChildren();
   $("workflow-empty").hidden=list.length>0;
   $("workflow-empty").querySelector("b").textContent=records.length?"No matching workflows":"No workflows yet";
@@ -28,7 +28,7 @@ function render() {
   $("workflow-visible").textContent=list.length;
 }
 async function load(){try{records=await getAll("workflows");records.sort((a,b)=>new Date(b.updatedAt||b.createdAt||0)-new Date(a.updatedAt||a.createdAt||0));render();}catch(e){$("workflow-empty").hidden=false;$("workflow-empty").querySelector("b").textContent="Local storage unavailable";$("workflow-empty").querySelector("p").textContent=e.message;toast(e.message);}}
-function normalizeImported(items) {
+function exportWorkflows() {\n  const payload={application:"AutoPilot Hub",schemaVersion:1,exportedAt:new Date().toISOString(),workflows:records};\n  const blob=new Blob([JSON.stringify(payload,null,2)],{type:"application/json"});\n  const url=URL.createObjectURL(blob),anchor=document.createElement("a");\n  anchor.href=url;anchor.download="autopilot-hub-workflows-"+new Date().toISOString().slice(0,10)+".json";\n  document.body.append(anchor);anchor.click();anchor.remove();window.setTimeout(()=>URL.revokeObjectURL(url),1000);\n  toast(records.length+" workflow(s) exported.");\n}\nfunction normalizeImported(items) {
   if (!Array.isArray(items)) throw new Error("JSON must contain a workflows array.");
   const now=new Date().toISOString();
   return items.map((w,index)=>{
@@ -39,12 +39,12 @@ function normalizeImported(items) {
 }
 document.addEventListener("DOMContentLoaded",()=>{
   $("workflow-search").addEventListener("input",render);
-  $("workflow-filter").addEventListener("change",render);
+  $("workflow-filter").addEventListener("change",render);\n  $("workflow-export").addEventListener("click",exportWorkflows);
   $("workflow-import").addEventListener("change",async(e)=>{
     const file=e.target.files[0];if(!file)return;
     try {
       const data=JSON.parse(await file.text());
-      const items=normalizeImported(Array.isArray(data)?data:data.workflows);
+      const items=normalizeImported(Array.isArray(data)?data:(data.workflows||data.data?.workflows));
       await putManyRecords("workflows",items);
       await load();toast(items.length+" workflow(s) imported.");
     } catch(err) { toast(err.message||"Import failed."); }
