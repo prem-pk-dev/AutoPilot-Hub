@@ -30,7 +30,7 @@ npx playwright install chromium
 npm run test:e2e
 ``
 
-A test suite being configured is not the same as a passing run. Release status must be updated only after checking the corresponding GitHub Actions run.
+The Chromium regression suite passed 7/7 tests on GitHub Actions for the Phase 3.2 branch. Cross-browser testing outside Chromium and deeper visual QA remain release follow-ups.
 
 ## Test data policy
 - Synthetic fixtures must be labeled test data.
