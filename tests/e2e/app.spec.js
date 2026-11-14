@@ -25,7 +25,7 @@ test("create, search, filter, edit and delete a workflow", async ({ page }) => {
   await page.locator(".workflow-card").getByRole("button", { name: "Delete" }).click();
   await expect(page.locator(".workflow-card")).toHaveCount(0);
 });
-test("workflow JSON import validates the entire file before saving", async ({ page }) => {
+test("workflow JSON import validates the entire file before saving and exports definitions", async ({ page }, testInfo) => {
   await page.goto("/workflows.html");
   await page.locator("#workflow-import").setInputFiles({ name:"invalid-workflows.json", mimeType:"application/json", buffer:Buffer.from(JSON.stringify([{name:"Valid workflow"},{name:"x"}])) });
   await expect(page.locator("#toast-region")).toContainText("Nothing was imported");
@@ -34,7 +34,7 @@ test("workflow JSON import validates the entire file before saving", async ({ pa
   await expect(page.locator(".workflow-card").filter({hasText:"Imported monitor"})).toBeVisible();
   const exportPromise=page.waitForEvent("download");
   await page.getByRole("button",{name:"Export workflows"}).click();
-  const exported=await exportPromise, exportPath="test-results/workflows-export.json";
+  const exported=await exportPromise, exportPath=testInfo.outputPath("workflows-export.json");
   await exported.saveAs(exportPath);
   const exportedData=JSON.parse(await readFile(exportPath,"utf8"));
   expect(exportedData.workflows.some(item=>item.name==="Imported monitor")).toBeTruthy();
