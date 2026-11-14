@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#080d18">
+  <meta name="description" content="Your browser-first automation control center.">
+  <title>Overview — AutoPilot Hub</title>
+  <link rel="stylesheet" href="./assets/css/global.css">
+  <script type="module" src="./assets/js/core/app.js"></script>
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar">
+      <a class="brand" href="./dashboard.html" aria-label="AutoPilot Hub home">
+        <span class="brand-mark">A</span><span>AutoPilot <b>Hub</b><small>CONTROL CENTER</small></span>
+      </a>
+      <div class="nav-label">WORKSPACE</div>
+      <nav class="nav-list" aria-label="Main navigation">
+        <a class="nav-link active" href="./dashboard.html" aria-current="page"><span>▦</span> Overview</a>
+        <div class="nav-link disabled" aria-disabled="true"><span>◇</span> Workflows <small>Phase 3</small></div>
+        <div class="nav-link disabled" aria-disabled="true"><span>⌘</span> Workflow builder <small>Phase 7</small></div>
+        <div class="nav-link disabled" aria-disabled="true"><span>◷</span> Scheduler <small>Phase 6</small></div>
+        <div class="nav-label">AUTOMATION</div>
+        <div class="nav-link disabled" aria-disabled="true"><span>▣</span> Browser automation <small>Phase 5</small></div>
+        <div class="nav-link disabled" aria-disabled="true"><span>⌘</span> GitHub automation <small>Phase 6</small></div>
+        <div class="nav-link disabled" aria-disabled="true"><span>◎</span> Website monitor <small>Phase 6</small></div>
+        <div class="nav-link disabled" aria-disabled="true"><span>▤</span> File automation <small>Phase 5</small></div>
+        <div class="nav-link disabled" aria-disabled="true"><span>▧</span> Image studio <small>Phase 5</small></div>
+        <div class="nav-label">INSIGHTS & SYSTEM</div>
+        <div class="nav-link disabled" aria-disabled="true"><span>≡</span> Executions <small>Phase 8</small></div>
+        <div class="nav-link disabled" aria-disabled="true"><span>♧</span> Notifications <small>Phase 8</small></div>
+        <div class="nav-link disabled" aria-disabled="true"><span>▥</span> Analytics <small>Phase 8</small></div>
+        <div class="nav-link disabled" aria-disabled="true"><span>⇄</span> Integrations <small>Phase 6</small></div>
+        <div class="nav-link disabled" aria-disabled="true"><span>▣</span> Templates <small>Phase 7</small></div>
+        <div class="nav-link disabled" aria-disabled="true"><span>⬡</span> Security <small>Phase 9</small></div>
+        <div class="nav-link disabled" aria-disabled="true"><span>⚙</span> Settings <small>Phase 2</small></div>
+      </nav>
+      <div class="sidebar-bottom">
+        <span class="status-dot"></span><span>Local workspace ready</span>
+        <small>v0.1.0 · Foundation</small>
+      </div>
+    </aside>
+
+    <main class="main-content">
+      <header class="topbar">
+        <button class="icon-button mobile-menu" id="menu-toggle" aria-label="Toggle navigation">☰</button>
+        <div class="breadcrumbs">Workspace <span>/</span> <b>Overview</b></div>
+        <div class="top-actions">
+          <span class="runtime-pill"><i></i> Browser runtime</span>
+          <button class="icon-button" id="theme-toggle" aria-label="Toggle color theme" title="Toggle theme">◐</button>
+        </div>
+      </header>
+
+      <section class="page-content">
+        <div class="page-heading">
+          <div>
+            <div class="eyebrow">AUTOMATION CONTROL CENTER</div>
+            <h1>Good to see you.</h1>
+            <p class="muted">Your automation workspace, at a glance.</p>
+          </div>
+          <div class="heading-actions">
+            <button class="button button-secondary" id="export-data">↧ Export local data</button>
+            <button class="button button-primary" id="create-workflow" disabled title="Workflow Builder is planned for Phase 7">＋ Create workflow <span class="button-note">Phase 7</span></button>
+          </div>
+        </div>
+
+        <div class="notice">
+          <span class="notice-icon">ⓘ</span>
+          <div><b>Foundation release</b><p>The dashboard shell and local workspace foundation are active. Other modules are intentionally disabled until their real functionality is implemented.</p></div>
+          <span class="notice-tag">v0.1.0</span>
+        </div>
+
+        <div class="section-heading"><div><h2>Workspace overview</h2><p class="muted">Live counts from this browser's local database.</p></div><span class="refresh-label"><i></i> Local data</span></div>
+        <div class="stats-grid">
+          <article class="stat-card"><div class="stat-top"><span>Saved workflows</span><span class="stat-icon cyan">◇</span></div><strong id="workflow-count">—</strong><small>Stored in this browser</small></article>
+          <article class="stat-card"><div class="stat-top"><span>Local executions</span><span class="stat-icon violet">↗</span></div><strong id="execution-count">—</strong><small>Recorded on this device</small></article>
+          <article class="stat-card"><div class="stat-top"><span>Scheduled cloud jobs</span><span class="stat-icon blue">◷</span></div><strong>0</strong><small>Not configured yet</small></article>
+          <article class="stat-card"><div class="stat-top"><span>Failed executions</span><span class="stat-icon amber">!</span></div><strong id="failed-count">—</strong><small>From local execution records</small></article>
+        </div>
+
+        <div class="content-grid">
+          <section class="panel activity-panel">
+            <div class="panel-heading"><div><h2>Recent activity</h2><p class="muted">Latest events recorded by this workspace.</p></div><span class="subtle-label">ACTIVITY LOG</span></div>
+            <div class="empty-state" id="activity-empty"><div class="empty-icon">⌁</div><b>No activity yet</b><p>When you run a supported automation, its real execution record will appear here.</p></div>
+            <div class="activity-list" id="activity-list" hidden></div>
+          </section>
+          <section class="panel health-panel">
+            <div class="panel-heading"><div><h2>Workspace health</h2><p class="muted">Browser capability checks.</p></div><span class="health-badge"><i></i> Checking</span></div>
+            <div class="health-row"><span>IndexedDB storage</span><b id="db-health">Checking…</b></div>
+            <div class="health-row"><span>Browser runtime</span><b class="healthy">Available</b></div>
+            <div class="health-row"><span>Cloud connection</span><b class="pending">Not connected</b></div>
+            <div class="health-row"><span>Local permissions</span><b class="pending">Not requested</b></div>
+            <p class="health-footnote">No files or external accounts are accessed automatically.</p>
+          </section>
+        </div>
+
+        <section class="panel quick-panel">
+          <div class="panel-heading"><div><h2>Automation modules</h2><p class="muted">Planned capabilities and implementation status.</p></div><span class="subtle-label">15 MODULES</span></div>
+          <div class="module-grid">
+            <div class="module-item module-live"><span>▦</span><div><b>Overview</b><small>Available now</small></div><i>●</i></div>
+            <div class="module-item"><span>◇</span><div><b>Workflow Builder</b><small>Planned · Phase 7</small></div></div>
+            <div class="module-item"><span>◷</span><div><b>Scheduler</b><small>Planned · Phase 6</small></div></div>
+            <div class="module-item"><span>▣</span><div><b>Browser Automation</b><small>Planned · Phase 5</small></div></div>
+            <div class="module-item"><span>⌘</span><div><b>GitHub Automation</b><small>Planned · Phase 6</small></div></div>
+            <div class="module-item"><span>◎</span><div><b>Website Monitor</b><small>Planned · Phase 6</small></div></div>
+            <div class="module-item"><span>▤</span><div><b>File Automation</b><small>Planned · Phase 5</small></div></div>
+            <div class="module-item"><span>▧</span><div><b>Image Studio</b><small>Planned · Phase 5</small></div></div>
+          </div>
+        </section>
+        <footer class="footer"><span>AutoPilot Hub <b>v0.1.0</b></span><span>Browser-first · Local data stays in this browser</span></footer>
+      </section>
+    </main>
+  </div>
+  <div class="toast-region" id="toast-region" aria-live="polite" aria-atomic="true"></div>
+</body>
+</html>
