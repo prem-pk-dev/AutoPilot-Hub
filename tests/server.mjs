@@ -7,7 +7,7 @@ const types = { ".html":"text/html; charset=utf-8", ".css":"text/css; charset=ut
 createServer(async (req,res) => {
   try {
     const pathname = decodeURIComponent(new URL(req.url, "http://localhost").pathname);
-    const relative = pathname === "/" ? "dashboard.html" : pathname.replace(/^\\/+/, "");
+    const relative = pathname === "/" ? "dashboard.html" : pathname.startsWith("/") ? pathname.slice(1) : pathname;
     const file = resolve(root, relative);
     if (file !== root && !file.startsWith(root + sep)) { res.writeHead(403); res.end("Forbidden"); return; }
     const body = await readFile(file);
