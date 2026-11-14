@@ -11,6 +11,27 @@
 8. Regression checks: previously working modules after each merge.
 9. Security checks: secret scan, unsafe HTML patterns, public-data review, least privilege.
 
+## Automated browser regression suite
+
+The repository includes a Playwright + Chromium end-to-end suite under `tests/e2e/`. GitHub Actions runs JavaScript syntax checks and the browser suite on pushes to `development/phase-3-2-quality-tests` and on pull requests targeting the configured development/main branches.
+
+Covered user flows:
+- Create, search, filter, edit and delete a workflow.
+- Reject a malformed workflow import without saving any partial records.
+- Export a workspace backup and restore workflow data plus theme preference.
+- Require two confirmations before clearing local data.
+- Open mobile navigation and check for horizontal overflow at 390px.
+- Confirm dashboard counts reflect IndexedDB records.
+
+Run locally after installing dependencies and Chromium:
+```sh
+npm install
+npx playwright install chromium
+npm run test:e2e
+``
+
+A test suite being configured is not the same as a passing run. Release status must be updated only after checking the corresponding GitHub Actions run.
+
 ## Test data policy
 - Synthetic fixtures must be labeled test data.
 - Never present fabricated sample counts as live statistics.
