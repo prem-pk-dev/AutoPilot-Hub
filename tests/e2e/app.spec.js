@@ -108,3 +108,32 @@ test("invalid workspace backup is rejected without replacing existing data", asy
   await page.goto("/workflows.html");
   await expect(page.locator(".workflow-card").filter({ hasText: "Keep this workflow" })).toBeVisible();
 });
+
+test("manual workflow execution records successful step output", async ({ page }) => {
+  await createWorkflow(page, "Text transform runner");
+  await page.locator(".workflow-card").getByRole("button", { name: "▶ Run now" }).click();
+  await expect(page.locator("#toast-region")).toContainText("Workflow completed");
+  await page.goto("/executions.html");
+  await expect(page.locator(".execution-card").filter({ hasText: "Text transform runner" })).toBeVisible();
+  await expect(page.locator("#run-success")).toHaveText("1");
+  await expect(page.getByRole("button", { name: "Export run history" })).toBeEnabled();
+  const historyDownload = page.waitForEvent("download");
+  await page.getByRole("button", { name: "Export run history" }).click();
+  await expect(await historyDownload).toBeTruthy();
+  await page.locator(".execution-details summary").first().click();
+  await expect(page.locator(".execution-step pre").first()).toContainText("HELLO FROM AUTOPILOT HUB");
+});
+
+test("invalid JSON action is recorded as a failed execution", async ({ page }) => {
+  await page.goto("/workflow-builder.html");
+  await page.getByLabel("Workflow name").fill("Invalid JSON workflow");
+  await page.getByLabel("Action type").selectOption("json_validate");
+  await page.getByLabel("JSON input").fill("{ invalid json");
+  await page.getByRole("button", { name: "Save workflow definition" }).click();
+  await expect(page).toHaveURL("http://127.0.0.1:4173/workflows.html");
+  await page.locator(".workflow-card").getByRole("button", { name: "▶ Run now" }).click();
+  await expect(page.locator("#toast-region")).toContainText("Step 1 (Validate JSON) failed");
+  await page.goto("/executions.html");
+  await expect(page.locator("#run-failed")).toHaveText("1");
+  await expect(page.locator(".execution-card").filter({ hasText: "Invalid JSON workflow" })).toContainText("failed");
+});

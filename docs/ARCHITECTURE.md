@@ -22,7 +22,8 @@ AutoPilot Hub is a single-user, browser-first automation control center. It comb
 ### Browser plane
 - Static pages served over HTTPS.
 - JavaScript ES modules for UI and orchestration.
-- IndexedDB for local workflow definitions, preferences, and browser-side history.
+- IndexedDB for local workflow definitions, preferences, and browser-side execution history.
+- A typed local execution engine for a small allow-listed set of deterministic actions; no arbitrary code execution.
 - File System Access API / file input APIs only where supported and only after user permission.
 - Web Workers may be used for CPU-heavy image processing when supported.
 - Browser APIs cannot silently control the entire desktop or arbitrary local folders.
@@ -56,14 +57,14 @@ No Python or Node.js installation is required on the user's computer. GitHub-hos
 - Browser storage may be cleared by the user/browser; provide export and backup guidance.
 
 ## Workflow execution model
-A workflow consists of:
-- trigger: manual, browser event, or supported GitHub schedule/dispatch;
-- steps: typed actions with validated configuration;
-- conditions: explicit branch/condition nodes;
-- execution context: browser-local or cloud;
-- result: status, timestamps, sanitized logs, and output references.
 
-Do not assume browser-local schedules run while the browser is closed. Cloud schedules may be delayed and are subject to GitHub quotas and platform limits.
+A workflow consists of:
+- trigger: currently manual for the browser-local engine; schedule/webhook triggers remain pending;
+- steps: typed actions with validated configuration;
+- execution context: browser-local or cloud;
+- result: status, timestamps, step logs, and output.
+
+The first browser-local engine supports text transformation, JSON validation, timestamp generation, and bounded waits. It runs only while the page remains open, uses no `eval` or dynamic code, makes no remote requests, and cannot access secrets. Browser-local schedules do not run while the browser is closed. Cloud schedules may be delayed and are subject to GitHub quotas and platform limits.
 
 ## Security boundary
 - Public repository contents are public.
@@ -71,7 +72,7 @@ Do not assume browser-local schedules run while the browser is closed. Cloud sch
 - GitHub Actions secrets are used only for cloud tasks that genuinely need credentials.
 - Workflow permissions default to read-only and are elevated per workflow only when necessary.
 - Third-party websites and workflow inputs are untrusted.
-- Avoid arbitrary user-supplied code execution in the visual builder.
+- Avoid arbitrary user-supplied code execution in the visual builder. The local engine must use an explicit allow-list of action types.
 - Confirm destructive operations and validate all inputs.
 
 ## Non-goals for v1

@@ -3,11 +3,13 @@ on:
   push:
     branches:
       - development/phase-3-2-quality-tests
+      - development/phase-4-local-execution
   pull_request:
     branches:
       - development/core-platform
       - main
       - development/phase-3-2-quality-tests
+      - development/phase-4-local-execution
 permissions:
   contents: read
 jobs:
@@ -27,9 +29,11 @@ jobs:
         run: |
           node --check assets/js/core/app.js
           node --check assets/js/core/storage.js
+          node --check assets/js/core/engine.js
           node --check assets/js/modules/workflows.js
           node --check assets/js/modules/workflow-builder.js
           node --check assets/js/modules/settings-manager.js
+          node --check assets/js/modules/executions.js
           node --check tests/server.mjs
           node --check tests/e2e/app.spec.js
       - name: Install Chromium
