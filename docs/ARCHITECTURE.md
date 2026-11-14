@@ -22,7 +22,7 @@ AutoPilot Hub is a single-user, browser-first automation control center. It comb
 ### Browser plane
 - Static pages served over HTTPS.
 - JavaScript ES modules for UI and orchestration.
-- IndexedDB for local workflow definitions, preferences, and browser-side history.
+- IndexedDB for local workflow definitions, preferences, and browser-side execution history.\n- A typed local execution engine for a small allow-listed set of deterministic actions; no arbitrary code execution.
 - File System Access API / file input APIs only where supported and only after user permission.
 - Web Workers may be used for CPU-heavy image processing when supported.
 - Browser APIs cannot silently control the entire desktop or arbitrary local folders.
@@ -71,7 +71,7 @@ Do not assume browser-local schedules run while the browser is closed. Cloud sch
 - GitHub Actions secrets are used only for cloud tasks that genuinely need credentials.
 - Workflow permissions default to read-only and are elevated per workflow only when necessary.
 - Third-party websites and workflow inputs are untrusted.
-- Avoid arbitrary user-supplied code execution in the visual builder.
+- Avoid arbitrary user-supplied code execution in the visual builder. The local engine must use an explicit allow-list of action types.
 - Confirm destructive operations and validate all inputs.
 
 ## Non-goals for v1
