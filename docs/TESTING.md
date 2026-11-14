@@ -13,7 +13,7 @@
 
 ## Automated browser regression suite
 
-The repository includes a Playwright + Chromium end-to-end suite under `tests/e2e/`. GitHub Actions runs JavaScript syntax checks and the browser suite on pushes to `development/phase-3-2-quality-tests` and on pull requests targeting the configured development/main branches.
+The repository includes a Playwright + Chromium end-to-end suite under `tests/e2e/`. GitHub Actions runs JavaScript syntax checks and the browser suite on pushes to `development/phase-3-2-quality-tests` and `development/phase-4-local-execution`, and on pull requests targeting the configured development/main branches.
 
 Covered user flows:
 - Create, search, filter, edit and delete a workflow.
@@ -21,7 +21,7 @@ Covered user flows:
 - Export a workspace backup and restore workflow data plus theme preference.
 - Require two confirmations before clearing local data.
 - Open mobile navigation and check for horizontal overflow at 390px.
-- Confirm dashboard counts reflect IndexedDB records.
+- Confirm dashboard counts reflect IndexedDB records.\n- Run a successful text-transform workflow and verify persisted step output.\n- Run invalid JSON input and verify a failed execution record appears in the Execution Center.
 
 Run locally after installing dependencies and Chromium:
 ```sh
@@ -30,7 +30,7 @@ npx playwright install chromium
 npm run test:e2e
 ``
 
-The Chromium regression suite passed 7/7 tests on GitHub Actions for the Phase 3.2 branch. Cross-browser testing outside Chromium and deeper visual QA remain release follow-ups.
+The Phase 3.2 Chromium suite passed 7/7 tests. Phase 4 adds manual execution cases; its first CI run must pass before the execution engine is merged. Cross-browser testing outside Chromium and deeper visual QA remain release follow-ups.
 
 ## Test data policy
 - Synthetic fixtures must be labeled test data.
