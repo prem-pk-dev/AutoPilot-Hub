@@ -23,3 +23,11 @@
 .next-step-panel .muted{max-width:700px}
 @media(max-width:1000px){.capability-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:600px){.module-status{max-width:none}.page-heading{gap:13px}.module-intro{padding:16px}.capability-grid{grid-template-columns:1fr}.next-step-panel{align-items:flex-start;flex-direction:column}}
+
+
+.module-item[href]{color:var(--text);text-decoration:none;transition:border-color .18s ease,transform .18s ease,background .18s ease}
+.module-item[href]:hover{border-color:color-mix(in srgb,var(--cyan) 45%,var(--line));transform:translateY(-1px);background:var(--surface)}
+.nav-link[href]:hover{background:var(--surface-2);color:var(--text)}
+.nav-link.active:hover{background:var(--cyan-soft);color:var(--cyan)}
+.button[href]{text-decoration:none}
+.button[href]:hover{filter:brightness(1.06)}
