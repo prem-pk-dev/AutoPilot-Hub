@@ -21,7 +21,11 @@ Covered user flows:
 - Export a workspace backup and restore workflow data plus theme preference.
 - Require two confirmations before clearing local data.
 - Open mobile navigation and check for horizontal overflow at 390px.
-- Confirm dashboard counts reflect IndexedDB records.\n- Run a successful text-transform workflow and verify persisted step output.\n- Run invalid JSON input and verify a failed execution record appears in the Execution Center.
+- Confirm dashboard counts reflect IndexedDB records.
+- Run a successful text-transform workflow and verify persisted step output.
+- Run invalid JSON input and verify a failed execution record appears in the Execution Center.
+- Run a successful text-transform workflow and verify persisted step output.
+- Run invalid JSON input and verify a failed execution record appears in the Execution Center.
 
 Run locally after installing dependencies and Chromium:
 ```sh
