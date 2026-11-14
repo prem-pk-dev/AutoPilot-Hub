@@ -3,7 +3,7 @@ import assert from "node:assert/strict";
 import { mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
 import { join } from "node:path";
 import { tmpdir } from "node:os";
-import { loadCloudWorkflow, runCloudWorkflow } from "../../scripts/cloud-runner.mjs";
+import { loadCloudWorkflow, runCloudWorkflow } from "../scripts/cloud-runner.mjs";
 
 const fixture = (steps = [{ type: "github_repo_health", owner: "sample-owner", repository: "sample-repo" }], enabled = true) => ({
   schemaVersion: 1,
