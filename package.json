@@ -1,0 +1,12 @@
+{
+  "name": "autopilot-hub",
+  "version": "0.3.2",
+  "private": true,
+  "description": "Browser-first automation workspace",
+  "scripts": {
+    "test:e2e": "playwright test"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.56.1"
+  }
+}
