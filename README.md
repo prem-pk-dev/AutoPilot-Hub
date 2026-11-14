@@ -32,4 +32,4 @@ A browser-first, single-user automation control center built with HTML, CSS, Jav
 - [Deployment](docs/DEPLOYMENT.md)
 
 ## Status
-Research and architecture baseline. Product implementation has not yet started.
+Foundation implementation in progress. The first responsive dashboard shell, IndexedDB workspace initialization, theme toggle, mobile navigation, and JSON backup export are implemented on `development/core-platform`. Remaining modules are phased work.
