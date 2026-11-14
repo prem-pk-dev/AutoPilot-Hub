@@ -33,7 +33,7 @@ npx playwright install chromium
 npm run test:e2e
 ``
 
-The Phase 3.2 Chromium suite passed 7/7 tests. The Phase 4 Chromium suite passed 9/9 tests on GitHub Actions, including successful and failed manual runs. Cross-browser testing outside Chromium and deeper visual QA remain release follow-ups. Cross-browser testing outside Chromium and deeper visual QA remain release follow-ups.
+The Phase 3.2 Chromium suite passed 7/7 tests. The Phase 4 Chromium suite passed 9/9 tests on GitHub Actions, including successful and failed manual runs. Phase 5 cloud-runner unit tests validate the registry allow-list, disabled/unknown workflow rejection, successful JSON report generation, API failures and malformed targets. The Phase 5 CI run must pass before merging. Cross-browser testing outside Chromium and deeper visual QA remain release follow-ups.
 
 ## Test data policy
 - Synthetic fixtures must be labeled test data.
