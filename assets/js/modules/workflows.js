@@ -13,7 +13,7 @@ function render() {
     const card=document.createElement("article"); card.className="workflow-card";
     const top=document.createElement("div"); top.className="workflow-card-top";
     const title=document.createElement("div"); title.innerHTML="<span class='subtle-label'>"+escapeHTML(w.triggerLabel||"Manual trigger")+"</span><h3>"+escapeHTML(w.name)+"</h3>";
-    const status=document.createElement("span"); status.className="workflow-state"; status.textContent=w.status==="active"?"Saved · enabled flag":"Draft";
+    const status=document.createElement("span"); status.className="workflow-state"; status.textContent=w.status==="active"?"Marked active":"Draft";
     top.append(title,status);
     const desc=document.createElement("p"); desc.className="muted"; desc.textContent=w.description||"No description added.";
     const meta=document.createElement("div"); meta.className="workflow-meta"; meta.textContent="Updated "+new Date(w.updatedAt||w.createdAt).toLocaleString();
