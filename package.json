@@ -1,0 +1,8 @@
+{
+  "name": "autopilot-hub",
+  "private": true,
+  "version": "0.3.1",
+  "type": "module",
+  "scripts": { "test:e2e": "playwright test" },
+  "devDependencies": { "@playwright/test": "1.56.1" }
+}
