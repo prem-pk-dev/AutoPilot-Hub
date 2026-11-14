@@ -18,9 +18,11 @@ test("exports and restores a workspace backup", async ({ page }) => {
   const backupBuffer = await readFile(backupPath);
 
   let clearDialogs = 0;
-  page.on("dialog", dialog => { clearDialogs += 1; dialog.accept(); });
+  const handleClearDialog = dialog => { clearDialogs += 1; dialog.accept(); };
+  page.on("dialog", handleClearDialog);
   await page.getByRole("button", { name: /clear all local data/i }).click();
   await expect.poll(() => clearDialogs).toBe(2);
+  page.off("dialog", handleClearDialog);
 
   await page.locator("#settings-import").setInputFiles({
     name: "autopilot-hub-backup.json",
