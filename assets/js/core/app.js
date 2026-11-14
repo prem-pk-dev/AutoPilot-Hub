@@ -19,6 +19,8 @@ async function refreshDashboard() {
     db.close();
     byId("db-health").textContent = "Available";
     byId("db-health").className = "healthy";
+    const healthBadge = document.querySelector(".health-badge");
+    if (healthBadge) healthBadge.innerHTML = "<i></i> Healthy";
 
     const [workflows, executions] = await Promise.all([getAll("workflows"), getAll("executions")]);
     byId("workflow-count").textContent = safeText(workflows.length);
@@ -45,6 +47,8 @@ async function refreshDashboard() {
   } catch (error) {
     byId("db-health").textContent = "Unavailable";
     byId("db-health").className = "pending";
+    const healthBadge = document.querySelector(".health-badge");
+    if (healthBadge) healthBadge.textContent = "Storage unavailable";
     byId("workflow-count").textContent = "—";
     byId("execution-count").textContent = "—";
     byId("failed-count").textContent = "—";
