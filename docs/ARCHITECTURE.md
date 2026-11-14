@@ -63,7 +63,7 @@ A workflow consists of:
 - execution context: browser-local or cloud;
 - result: status, timestamps, sanitized logs, and output references.
 
-Do not assume browser-local schedules run while the browser is closed. Cloud schedules may be delayed and are subject to GitHub quotas and platform limits.
+Do not assume browser-local schedules run while the browser is closed. The first local engine is manual-only; cloud schedules may be delayed and are subject to GitHub quotas and platform limits.
 
 ## Security boundary
 - Public repository contents are public.
