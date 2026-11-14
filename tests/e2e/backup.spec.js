@@ -7,13 +7,13 @@ test("exports and restores a workspace backup", async ({ page }) => {
   await page.reload();
   await page.getByLabel(/workflow name/i).fill("Backup validation workflow");
   await page.getByRole("button", { name: /save workflow definition/i }).click();
-  await page.waitForURL(/workflows\\.html$/);
+  await page.waitForURL(/workflows\.html$/);
 
   await page.goto("/settings.html");
   const downloadPromise = page.waitForEvent("download");
   await page.getByRole("button", { name: /download backup/i }).click();
   const download = await downloadPromise;
-  expect(download.suggestedFilename()).toMatch(/autopilot-hub-backup-.*\\.json/);
+  expect(download.suggestedFilename()).toMatch(/autopilot-hub-backup-.*\.json/);
   const backupPath = await download.path();
   const backupBuffer = await readFile(backupPath);
 
