@@ -114,3 +114,7 @@
 .scheduler-boundary ol{padding-left:20px;color:var(--muted);font-size:11px;line-height:1.8}
 .scheduler-boundary li{padding-left:4px}
 @media(max-width:600px){.cloud-workflow-head{flex-direction:column}.cloud-workflow-actions{flex-direction:column}.cloud-workflow-actions .button{width:100%;justify-content:center}}
+
+
+/* Keep the mobile menu control above the off-canvas navigation so it can close it. */
+@media(max-width:760px){.topbar{z-index:11}.sidebar{top:68px;bottom:0;z-index:10}}
