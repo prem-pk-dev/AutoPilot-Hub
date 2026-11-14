@@ -17,6 +17,8 @@ This repository is public. All committed files, workflow definitions, examples, 
 - Pin third-party actions to reviewed immutable commit SHAs where practical.
 - Avoid executing untrusted pull-request code with secrets.
 - Validate all workflow_dispatch inputs and remote response data.
+- The initial cloud runner accepts only registered workflow IDs and the `github_repo_health` action. Its request destination is fixed to `api.github.com`; it does not execute shell commands or arbitrary URLs.
+- The initial cloud runner uses `contents: read`, no personal access token, and stores only public repository metadata in a short-retention JSON artifact.
 
 ## Browser security
 - Request file/device permissions only at the moment a feature needs them.
